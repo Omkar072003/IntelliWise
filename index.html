@@ -1,0 +1,1479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intelliwise - Learn & Succeed</title>
+    <!-- Font Awesome Latest Version -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Google Fonts for Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="favicon.png" type="image/x-icon">
+    <style>
+        :root {
+            /* Dark Mode (Default) */
+            --background-color: #1C2526;
+            --text-color: #FFFFFF;
+            --accent-color: #FFC107;
+            --secondary-text-color: #1C2526;
+            --card-bg: rgba(255, 255, 255, 0.8);
+            --header-footer-bg: rgba(28, 37, 38, 0.3);
+            --button-bg: #FFC107;
+            --button-text: #1C2526;
+            --button-border: 2px solid #FFC107;
+            --progress-bg: #e0e0e0;
+            --object-book-bg: #FFC107;
+            --object-star-bg: #FFFFFF;
+            --object-grad-cap-bg: #1C2526;
+            --object-globe-bg: radial-gradient(circle at 30% 30%, #FFFFFF 10%, #1C2526 50%);
+        }
+
+        body.light-mode {
+            --background-color: #2C466D;
+            --text-color: #FFFFFF;
+            --accent-color: #FFD700;
+            --secondary-text-color: #2C466D;
+            --card-bg: rgba(255, 255, 255, 0.9);
+            --header-footer-bg: rgba(255, 255, 255, 0.3);
+            --button-bg: #FFD700;
+            --button-text: #2C466D;
+            --button-border: 2px solid #FFD700;
+            --progress-bg: #5A7399;
+            --object-book-bg: #FFD700;
+            --object-star-bg: #FFFFFF;
+            --object-grad-cap-bg: #FFD700;
+            --object-globe-bg: radial-gradient(circle at 30% 30%, #FFFFFF 10%, #2C466D 50%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            position: relative;
+            overflow-x: hidden;
+            transition: background 0.5s ease, color 0.5s ease;
+        }
+
+        .background-objects {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: -1;
+            pointer-events: none;
+            perspective: 1500px;
+        }
+
+        .object {
+            position: absolute;
+            opacity: 0.7;
+            animation: float 12s infinite ease-in-out;
+            transform-style: preserve-3d;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0) translateX(0) translateZ(0) rotateY(0deg) rotateX(0deg) rotateZ(0deg) scale(1); }
+            50% { transform: translateY(-30px) translateX(30px) translateZ(50px) rotateY(180deg) rotateX(90deg) rotateZ(45deg) scale(1.2); }
+            100% { transform: translateY(0) translateX(0) translateZ(0) rotateY(360deg) rotateX(0deg) rotateZ(0deg) scale(1); }
+        }
+
+        .book {
+            width: 50px;
+            height: 35px;
+            background: var(--object-book-bg);
+            clip-path: polygon(0 0, 100% 0, 85% 100%, 15% 100%);
+            box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .star {
+            width: 25px;
+            height: 25px;
+            background: var(--object-star-bg);
+            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+            box-shadow: 5px 5px 12px rgba(0, 0, 0, 0.5);
+        }
+
+        .pencil {
+            width: 12px;
+            height: 60px;
+            background: linear-gradient(to bottom, var(--object-book-bg) 70%, var(--text-color) 70%, var(--text-color) 85%, var(--background-color) 85%);
+            clip-path: polygon(0 0, 100% 0, 100% 70%, 50% 100%, 0 70%);
+            box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .grad-cap {
+            width: 50px;
+            height: 50px;
+            background: var(--object-grad-cap-bg);
+            position: relative;
+            box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .grad-cap::before {
+            content: '';
+            position: absolute;
+            top: -12px;
+            left: 6px;
+            width: 38px;
+            height: 38px;
+            background: var(--object-grad-cap-bg);
+            transform: rotate(45deg);
+            box-shadow: 5px 5px 12px rgba(0, 0, 0, 0.5);
+        }
+
+        .grad-cap::after {
+            content: '';
+            position: absolute;
+            top: -6px;
+            left: 18px;
+            width: 12px;
+            height: 24px;
+            background: var(--object-book-bg);
+            clip-path: polygon(0 0, 100% 0, 100% 70%, 50% 100%, 0 70%);
+        }
+
+        .globe {
+            width: 35px;
+            height: 35px;
+            background: var(--object-globe-bg);
+            border-radius: 50%;
+            box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--header-footer-bg);
+            color: var(--text-color);
+            padding: 1rem 2rem;
+            width: 100%;
+            z-index: 10;
+            animation: slideIn 0.5s ease-out;
+            transition: background 0.5s ease;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(-100%); }
+            to { transform: translateY(0); }
+        }
+
+        .logo {
+            height: 150px;
+            transition: height 0.3s ease;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 1.5rem;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+            transform: translateY(-2px);
+        }
+
+        .hamburger {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-color);
+            transition: transform 0.3s ease;
+        }
+
+        .hamburger:hover {
+            transform: rotate(90deg);
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .cta {
+            background: var(--button-bg);
+            border: none;
+            padding: 0.75rem 1.5rem;
+            color: var(--button-text);
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+
+        .cta:hover {
+            transform: scale(1.05);
+            background: var(--accent-color);
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            background: var(--card-bg);
+            min-width: 160px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 100;
+            border-radius: 5px;
+            overflow: hidden;
+            transition: opacity 0.3s ease;
+            opacity: 0;
+        }
+
+        .dropdown-content a {
+            color: var(--secondary-text-color);
+            padding: 0.75rem 1rem;
+            text-decoration: none;
+            display: block;
+            font-size: 0.9rem;
+            transition: background 0.3s ease;
+        }
+
+        .dropdown-content a:hover {
+            background: var(--button-bg);
+            color: var(--button-text);
+        }
+
+        .dropdown-content.show {
+            display: block;
+            opacity: 1;
+        }
+
+        .mode-toggle {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            margin-right: 50px;
+        }
+
+        .mode-toggle:hover {
+            transform: scale(1.1);
+            opacity: 0.8;
+        }
+
+        .tooltip {
+            position: relative;
+            display: inline-block;
+        }
+
+        .tooltip .tooltip-text {
+            visibility: hidden;
+            width: 120px;
+            background-color: var(--accent-color);
+            color: var(--button-text);
+            text-align: center;
+            border-radius: 5px;
+            padding: 5px;
+            position: absolute;
+            z-index: 100;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -60px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 0.8rem;
+        }
+
+        .tooltip:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        main {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-slider {
+            position: relative;
+            width: 100%;
+            height: 600px;
+            overflow: hidden;
+            background: transparent;
+            z-index: 1;
+        }
+
+        .slider-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .slide {
+            position: relative;
+            flex: 0 0 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+        }
+
+        .slide.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .slide:not(.active) {
+            transform: scale(0.95);
+        }
+
+        .slide-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        .slide-content {
+            text-align: center;
+            color: var(--text-color);
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: transform 0.5s ease, opacity 0.5s ease;
+        }
+
+        .slide.active .slide-content {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .slide-content h1 {
+            font-size: 3rem;
+            color: var(--accent-color);
+            animation: fadeInDown 1.5s ease, bounce 2s infinite alternate;
+        }
+
+        .slide-content p {
+            font-size: 1.5rem;
+            margin: 1rem 0;
+            animation: fadeIn 2s ease;
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes bounce {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-10px); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .slider-nav {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            opacity: 0;
+            animation: fadeIn 1s ease-in forwards 0.5s;
+        }
+
+        .slider-nav .prev-slide,
+        .slider-nav .next-slide {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 193, 7, 0.3));
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: var(--text-color);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            animation: pulse 2s infinite ease-in-out;
+        }
+
+        .slider-nav .prev-slide:hover,
+        .slider-nav .next-slide:hover {
+            background: linear-gradient(135deg, rgba(255, 193, 7, 0.5), rgba(255, 215, 0, 0.7));
+            transform: scale(1.1) translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+            border-color: var(--accent-color);
+        }
+
+        .slider-nav .prev-slide i,
+        .slider-nav .next-slide i {
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .slider-nav .prev-slide:hover i {
+            transform: translateX(-3px) rotate(-5deg);
+        }
+
+        .slider-nav .next-slide:hover i {
+            transform: translateX(3px) rotate(5deg);
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); }
+            50% { transform: scale(1.05); box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3); }
+            100% { transform: scale(1); box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); }
+        }
+
+        .dots {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            background: var(--text-color);
+            opacity: 0.5;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: opacity 0.3s ease, background 0.3s ease, transform 0.3s ease;
+        }
+
+        .dot.active {
+            opacity: 1;
+            background: var(--accent-color);
+            transform: scale(1.2);
+        }
+
+        .dot:hover {
+            opacity: 0.8;
+            transform: scale(1.1);
+        }
+
+        .education-categories {
+            position: relative;
+            padding: 2rem;
+            text-align: center;
+            background: url('https://via.placeholder.com/1920x600?text=University+Campus') no-repeat center center/cover;
+            margin: 1rem;
+            border-radius: 10px;
+            overflow: hidden;
+            animation: fadeInUp 1s ease;
+        }
+
+        .education-categories::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 0;
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .category-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 300px;
+        }
+
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .category-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .category-icon {
+            font-size: 3rem;
+            color: var(--accent-color);
+            margin-bottom: 0.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .category-card:hover .category-icon {
+            transform: scale(1.2) rotate(10deg);
+        }
+
+        .category-card h3 {
+            color: var(--text-color);
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .category-card p {
+            color: var(--text-color);
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .category-card:nth-child(1) { animation: slideUp 1s ease-out; }
+        .category-card:nth-child(2) { animation: slideUp 1s ease-out 0.2s; }
+        .category-card:nth-child(3) { animation: slideUp 1s ease-out 0.4s; }
+        .category-card:nth-child(4) { animation: slideUp 1s ease-out 0.6s; }
+
+        .courses {
+            padding: 2rem;
+            text-align: center;
+            background: transparent;
+            border-radius: 10px;
+            margin: 1rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        .courses h2 {
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+            font-size: 2rem;
+            animation: fadeIn 1s ease;
+        }
+
+        .course-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .course-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 300px;
+        }
+
+        .course-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .course-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .course-icon {
+            font-size: 3rem;
+            color: var(--accent-color);
+            margin-bottom: 0.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .course-card:hover .course-icon {
+            transform: scale(1.2) rotate(10deg);
+        }
+
+        .course-card h3 {
+            color: var(--text-color);
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .course-card p {
+            color: var(--text-color);
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .course-card:nth-child(1) { animation: slideUp 1s ease-out; }
+        .course-card:nth-child(2) { animation: slideUp 1s ease-out 0.2s; }
+        .course-card:nth-child(3) { animation: slideUp 1s ease-out 0.4s; }
+        .course-card:nth-child(4) { animation: slideUp 1s ease-out 0.6s; }
+
+        .profile {
+            padding: 2rem;
+            text-align: center;
+            background: transparent;
+            border-radius: 10px;
+            margin: 1rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        .profile-card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 1rem;
+            max-width: 300px;
+            margin: 0 auto;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .profile-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .profile-card h3 {
+            color: var(--secondary-text-color);
+            font-size: 1.2rem;
+        }
+
+        .profile-card p {
+            color: var(--secondary-text-color);
+            font-size: 0.9rem;
+        }
+
+        .avatar {
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            transition: transform 0.3s ease;
+        }
+
+        .profile-card:hover .avatar {
+            transform: scale(1.1);
+        }
+
+        .progress-bar {
+            background: var(--progress-bg);
+            height: 10px;
+            border-radius: 5px;
+            margin: 0.5rem 0;
+            overflow: hidden;
+        }
+
+        .progress {
+            background: var(--accent-color);
+            height: 100%;
+            border-radius: 5px;
+            width: 0;
+            transition: width 1s ease-in-out;
+        }
+
+        .profile-btn {
+            background: transparent;
+            border: var(--button-border);
+            padding: 0.5rem 1rem;
+            color: var(--accent-color);
+            border-radius: 5px;
+            cursor: pointer;
+            transition: transform 0.3s ease, background 0.3s ease, color 0.3s ease;
+        }
+
+        .profile-btn:hover {
+            background: var(--button-bg);
+            color: var(--button-text);
+            transform: scale(1.05);
+        }
+
+        .about-us, .vision-mission, .purpose, .uvp, .outcome-impact, .who-we-are,
+        .core-values, .founders, .advisory-board, .associates, .team,
+        .collaborators, .contact-us, .contact-info {
+            padding: 2rem;
+            text-align: center;
+            background: transparent;
+            border-radius: 10px;
+            margin: 1rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        .founder-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .founder-card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .founder-card img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 0.5rem;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        label {
+            color: var(--text-color);
+            font-weight: 500;
+        }
+
+        input, textarea {
+            padding: 0.5rem;
+            border: 1px solid var(--accent-color);
+            border-radius: 5px;
+            background: var(--card-bg);
+            color: var(--secondary-text-color);
+            width: 100%;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        button[type="submit"] {
+            background: var(--button-bg);
+            color: var(--button-text);
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+
+        button[type="submit"]:hover {
+            transform: scale(1.05);
+            background: var(--accent-color);
+        }
+
+        /* Footer Styles with Social Icons */
+        footer {
+            background: var(--header-footer-bg);
+            color: var(--text-color);
+            text-align: center;
+            padding: 1rem;
+            animation: fadeIn 1s ease;
+            position: relative;
+            z-index: 1;
+            transition: background 0.5s ease;
+        }
+
+        footer ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        footer a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        footer a:hover {
+            color: var(--accent-color);
+            transform: translateY(-2px);
+        }
+
+        .footer-social {
+            margin-top: 1rem;
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+
+        .footer-social a {
+            color: #FFC107;
+            font-size: 1.5rem;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        .footer-social a:hover {
+            color: #FFD54F;
+            transform: scale(1.2);
+        }
+
+        /* Floating WhatsApp Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 100;
+        }
+
+        .whatsapp-float a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            background: #25D366;
+            color: #FFFFFF;
+            border-radius: 50%;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            text-decoration: none;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .whatsapp-float a:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .whatsapp-float i {
+            font-size: 2rem;
+        }
+
+        .fade-in {
+            opacity: 1 !important;
+            animation: fadeInUp 0.5s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .btn-primary {
+            background: var(--button-bg);
+            border: none;
+            color: var(--button-text);
+            padding: 0.75rem 1.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.1);
+            background: var(--accent-color);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: var(--button-border);
+            color: var(--accent-color);
+            padding: 0.75rem 1.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: transform 0.3s ease, background 0.3s ease, color 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background: var(--button-bg);
+            color: var(--button-text);
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 1024px) {
+            .hero-slider { height: 500px; }
+            .slide-content h1 { font-size: 2.5rem; }
+            .slide-content p { font-size: 1.2rem; }
+            .nav-links { gap: 1rem; }
+            .logo { height: 100px; }
+            .courses h2 { font-size: 1.8rem; }
+        }
+
+        @media (max-width: 768px) {
+            header { padding: 0.3rem 0.5rem; flex-wrap: wrap; }
+            .hamburger { display: block; }
+            .nav-links { display: none; position: absolute; top: 100%; left: 0; background: var(--header-footer-bg); width: 100%; padding: 1rem; flex-direction: column; gap: 0.5rem; transform: translateY(-10px); opacity: 0; transition: transform 0.3s ease, opacity 0.3s ease; }
+            .nav-links.active { display: flex; transform: translateY(0); opacity: 1; }
+            .nav-links a { font-size: 1.3rem; padding: 0.5rem 0; }
+            .header-buttons { display: flex; align-items: center; }
+            .logo { height: 60px; }
+            .hero-slider { height: 400px; }
+            .slide-content { padding: 1.5rem; }
+            .slide-content h1 { font-size: 2rem; }
+            .slide-content p { font-size: 1rem; }
+            .slider-nav { bottom: 20px; gap: 1rem; }
+            .slider-nav .prev-slide, .slider-nav .next-slide { width: 40px; height: 40px; }
+            .slider-nav .prev-slide i, .slider-nav .next-slide i { font-size: 1rem; }
+            .dot { width: 8px; height: 8px; }
+            .object { width: 30px; height: 20px; }
+            .book { width: 40px; height: 25px; }
+            .star { width: 15px; height: 15px; }
+            .pencil { width: 8px; height: 40px; }
+            .grad-cap { width: 30px; height: 30px; }
+            .grad-cap::before { width: 20px; height: 20px; top: -8px; left: 5px; }
+            .grad-cap::after { top: -4px; left: 10px; width: 8px; height: 15px; }
+            .globe { width: 20px; height: 20px; }
+            .whatsapp-float a { width: 50px; height: 50px; }
+            .whatsapp-float i { font-size: 1.8rem; }
+            .courses, .profile { padding: 1.5rem; margin: 0.5rem; }
+            .courses h2 { font-size: 1.5rem; }
+            footer { padding: 0.5rem; }
+            footer ul { flex-direction: column; gap: 0.5rem; }
+            .footer-social { gap: 1rem; }
+            .footer-social a { font-size: 1.3rem; }
+            .category-grid { grid-template-columns: 1fr; }
+            .course-grid { grid-template-columns: 1fr; }
+            .category-card, .course-card { width: 80%; margin: 0 auto; height: 250px; }
+            .category-card h3, .course-card h3 { font-size: 1.1rem; }
+            .category-card p, .course-card p { font-size: 0.8rem; }
+            .category-icon, .course-icon { font-size: 1.8rem; }
+        }
+
+        @media (max-width: 480px) {
+            header { padding: 0.2rem 0.5rem; }
+            .logo { height: 40px; }
+            .nav-links a { font-size: 0.9rem; }
+            .cta { padding: 0.3rem 0.6rem; font-size: 0.8rem; }
+            .mode-toggle { font-size: 1rem; }
+            .hero-slider { height: 300px; }
+            .slide-content { padding: 1rem; }
+            .slide-content h1 { font-size: 1.5rem; }
+            .slide-content p { font-size: 0.9rem; }
+            .btn-primary { padding: 0.5rem 1rem; font-size: 0.9rem; }
+            .slider-nav { bottom: 15px; gap: 0.8rem; }
+            .slider-nav .prev-slide, .slider-nav .next-slide { width: 35px; height: 35px; }
+            .slider-nav .prev-slide i, .slider-nav .next-slide i { font-size: 0.9rem; }
+            .dot { width: 6px; height: 6px; }
+            .profile-card { max-width: 250px; }
+            .profile-card h3 { font-size: 1rem; }
+            .profile-card p { font-size: 0.8rem; }
+            .avatar { width: 40px; height: 40px; }
+            .profile-btn { padding: 0.3rem 0.6rem; font-size: 0.8rem; }
+            .whatsapp-float a { width: 45px; height: 45px; }
+            .whatsapp-float i { font-size: 1.5rem; }
+            .courses, .profile { padding: 1rem; margin: 0.3rem; }
+            .courses h2 { font-size: 1.3rem; }
+            footer { padding: 0.5rem; font-size: 0.8rem; }
+            footer a { font-size: 0.8rem; }
+            .footer-social { gap: 0.8rem; }
+            .footer-social a { font-size: 1.1rem; }
+            .category-card, .course-card { width: 80%; height: 200px; }
+            .category-card h3, .course-card h3 { font-size: 1rem; }
+            .category-card p, .course-card p { font-size: 0.7rem; }
+            .category-icon, .course-icon { font-size: 1.5rem; }
+            .btn-primary { padding: 0.5rem 1rem; font-size: 0.8rem; }
+        }
+
+        @media (max-width: 360px) {
+            .whatsapp-float a { width: 40px; height: 40px; }
+            .whatsapp-float i { font-size: 1.3rem; }
+            .footer-social { gap: 0.6rem; }
+            .footer-social a { font-size: 1rem; }
+        }
+
+        @media (min-width: 1200px) {
+            .whatsapp-float a { width: 70px; height: 70px; }
+            .whatsapp-float i { font-size: 2.5rem; }
+            .footer-social { gap: 2rem; }
+            .footer-social a { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Objects -->
+    <div class="background-objects">
+        <div class="object book"></div>
+        <div class="object star"></div>
+        <div class="object pencil"></div>
+        <div class="object grad-cap"></div>
+        <div class="object globe"></div>
+        <div class="object book"></div>
+        <div class="object star"></div>
+        <div class="object pencil"></div>
+        <div class="object grad-cap"></div>
+        <div class="object globe"></div>
+        <div class="object book"></div>
+        <div class="object star"></div>
+        <div class="object pencil"></div>
+        <div class="object grad-cap"></div>
+        <div class="object globe"></div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <img src="logo.png" alt="Intelliwise Logo" class="logo">
+        <nav>
+            <div class="hamburger">☰</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#courses">Programs</a></li>
+                <li><a href="#exams">Test Preparation</a></li>
+                <li><a href="#about-us">About Us</a></li>
+                <li><a href="#contact-us">Contact Us</a></li>
+                <li><a href="#profile">Profile</a></li>
+            </ul>
+        </nav>
+        <div class="header-buttons">
+            <button class="mode-toggle tooltip" aria-label="Toggle Light/Dark Mode">
+                <i class="fas fa-moon"></i>
+                <span class="tooltip-text">Toggle Theme</span>
+            </button>
+            <div class="dropdown">
+                <button class="cta tooltip" id="login-btn">Login
+                    <span class="tooltip-text">Sign in</span>
+                </button>
+                <div class="dropdown-content" id="login-dropdown">
+                    <a href="login-explorer.html">Login as Explorer</a>
+                    <a href="login-educator.html">Login as Educator</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Slider Section -->
+        <section class="hero-slider">
+            <div class="slider-container">
+                <div class="slide active" style="background-image: url('https://www.youtube.com/watch?v=e5Hc2B50Z7c');">
+                    <div>
+                        <video class="slide-video" autoplay muted loop>
+                            <source src="study.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <div class="slide-content">
+                            <h1>Insight • Innovate • Impact</h1>
+                            <p>Empower your learning journey with Intelliwise.</p>
+                            <button class="btn-primary">Learn More</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide" style="background-image: url('https://via.placeholder.com/1920x600?text=Education+2');">
+                    <div>
+                        <video class="slide-video" autoplay muted loop>
+                            <source src="video2.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <div class="slide-content">
+                            <h1>Learn • Grow • Succeed</h1>
+                            <p>Comprehensive courses for UPSC, SSC, and CBSE.</p>
+                            <button class="btn-primary">Learn More</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide">
+                    <video class="slide-video" autoplay muted loop>
+                        <source src="video3.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="slide-content">
+                        <h1>Discover • Prepare • Excel</h1>
+                        <p>Master your exams with our expert resources.</p>
+                        <button class="btn-primary">Learn More</button>
+                    </div>
+                </div>
+            </div>
+            <div class="slider-nav">
+                <button class="prev-slide" aria-label="Previous Slide">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <div class="dots"></div>
+                <button class="next-slide" aria-label="Next Slide">
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- Course Section -->
+        <section id="courses" class="courses">
+            <h2>Explore Our Programs</h2>
+            <div class="course-grid">
+                <div class="course-card">
+                    <div class="course-content">
+                        <i class="fas fa-school course-icon"></i>
+                        <h3>PROGRAM FOR SCHOOL</h3>
+                        <p>Explore educational program for school students</p>
+                        <a href="k12.html" class="btn-primary">Learn More</a>
+                    </div>
+                </div>
+                <div class="course-card">
+                    <div class="course-content">
+                        <i class="fas fa-graduation-cap course-icon"></i>
+                        <h3>HIGHER EDUCATION</h3>
+                        <p>Discover opportunities for higher education</p>
+                        <a href="highereducation.html" class="btn-primary">Learn More</a>
+                    </div>
+                </div>
+                <div class="course-card">
+                    <div class="course-content">
+                        <i class="fas fa-briefcase course-icon"></i>
+                        <h3>JOBS</h3>
+                        <p>Find your dream job with Intelliwise</p>
+                        <a href="jobs.html" class="btn-primary">Learn More</a>
+                    </div>
+                </div>
+                <div class="course-card">
+                    <div class="course-content">
+                        <i class="fas fa-user-tie course-icon"></i>
+                        <h3>EXECUTIVE</h3>
+                        <p>Advance your career with executive education</p>
+                        <a href="#executive" class="btn-primary">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- User Profile Section -->
+        <section id="profile" class="profile">
+            <div class="profile-card">
+                <img src="profile.png" alt="User" class="avatar">
+                <h3>Welcome, John Doe</h3>
+                <p>Courses Enrolled: 3</p>
+                <div class="progress-bar"><div class="progress" style="width: 60%;"></div></div>
+                <p>Exams Taken: 5 (Avg. 85%)</p>
+                <button class="profile-btn">View Profile</button>
+            </div>
+        </section>
+
+        <!-- About Us and Other Sections -->
+        <section id="about-us" class="about-us">
+            <h2>About Us</h2>
+            <p>Intelliwise is dedicated to providing top-notch educational resources for students preparing for various competitive exams and school curricula.</p>
+            <p>With a team of experienced educators and technologists, we strive to create an engaging and effective learning platform.</p>
+        </section>
+
+        <section id="vision-mission" class="vision-mission">
+            <h2>Vision & Mission</h2>
+            <p><strong>Vision:</strong> To be the leading provider of innovative educational solutions.</p>
+            <p><strong>Mission:</strong> To deliver high-quality, accessible, and personalized learning experiences.</p>
+        </section>
+
+        <section id="purpose" class="purpose">
+            <h2>Purpose</h2>
+            <p>Our purpose is to bridge the gap between traditional education and modern technology.</p>
+        </section>
+
+        <section id="uvp" class="uvp">
+            <h2>Unique Value Proposition</h2>
+            <p>Intelliwise offers a unique blend of expert-curated content and adaptive learning technologies.</p>
+        </section>
+
+        <section id="outcome-impact" class="outcome-impact">
+            <h2>Outcome & Impact</h2>
+            <p>Students have achieved significant improvements in their exam scores through our platform.</p>
+        </section>
+
+        <section id="who-we-are" class="who-we-are">
+            <h2>Who We Are</h2>
+            <p>We are a diverse team of educators, technologists, and innovators passionate about education.</p>
+        </section>
+
+        <section id="core-values" class="core-values">
+            <h2>Our Core Values</h2>
+            <ul>
+                <li><strong>Excellence:</strong> Highest quality in everything we do.</li>
+                <li><strong>Innovation:</strong> Embracing new ideas and technologies.</li>
+                <li><strong>Integrity:</strong> Operating with honesty and transparency.</li>
+                <li><strong>Empathy:</strong> Catering to unique learner needs.</li>
+                <li><strong>Collaboration:</strong> Power of teamwork and partnerships.</li>
+            </ul>
+        </section>
+
+        <section id="founders" class="founders">
+            <h2>Our Founders</h2>
+            <div class="founder-grid">
+                <div class="founder-card">
+                    <img src="rajnikant.png" alt="Founder 1">
+                    <h3>Rajnikant Patel</h3>
+                    <p>Chairman</p>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                </div>
+                <div class="founder-card">
+                    <img src="viresh.png" alt="Founder 2">
+                    <h3>Viresh Patel</h3>
+                    <p>CEO & Founder</p>
+                    <p>Jane drives innovation with AI and machine learning expertise.</p>
+                </div>
+                <div class="founder-card">
+                    <img src="jyoti.png" alt="Founder 3">
+                    <h3>Jyoti Patel</h3>
+                    <p>Director</p>
+                    <p>Michael ensures smooth operations and management.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="advisory-board" class="advisory-board">
+            <h2>Our Advisory Board</h2>
+            <p>Renowned educators and industry experts guide our strategic direction.</p>
+        </section>
+
+        <section id="associates" class="associates">
+            <h2>Our Associates</h2>
+            <p>We collaborate with educational institutions and technology partners.</p>
+        </section>
+
+        <section id="team" class="team">
+            <h2>Our Team</h2>
+            <p>Talented individuals united to revolutionize education.</p>
+        </section>
+
+        <section id="collaborators" class="collaborators">
+            <h2>Our Collaborators</h2>
+            <p>We work with schools and universities to integrate our platform.</p>
+        </section>
+
+        <section id="contact-us" class="contact-us">
+            <h2>Contact Us</h2>
+            <form>
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" required></textarea>
+                <button type="submit" class="btn-primary">Send Message</button>
+            </form>
+        </section>
+
+        <section id="contact-info" class="contact-info">
+            <h2>Contact Information</h2>
+            <p>Address: 123 Education Lane, Learning City, 45678</p>
+            <p>Phone: (123) 456-7890</p>
+            <p>Email: contact@intelliwise.com</p>
+        </section>
+    </main>
+
+    <!-- Footer with Social Media Icons -->
+    <footer>
+        <p>Intelliwise © 2025</p>
+        <ul>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+        </ul>
+        <div class="footer-social">
+            <a href="https://facebook.com" target="_blank" aria-label="Facebook">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="https://twitter.com" target="_blank" aria-label="Twitter">
+                <i class="fab fa-twitter"></i>
+            </a>
+            <a href="https://instagram.com/intellidea.iii" target="_blank" aria-label="Instagram">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://linkedin.com" target="_blank" aria-label="LinkedIn">
+                <i class="fab fa-linkedin-in"></i>
+            </a>
+            <a href="https://youtube.com" target="_blank" aria-label="YouTube">
+                <i class="fab fa-youtube"></i>
+            </a>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp Button -->
+    <div class="whatsapp-float">
+        <a href="https://wa.me/1234567890" target="_blank" aria-label="Chat on WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+    </div>
+
+    <script>
+        // Hamburger Menu Toggle
+        document.querySelector('.hamburger').addEventListener('click', () => {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+
+        // Hero Slider Functionality
+        document.addEventListener('DOMContentLoaded', () => {
+            const sliderContainer = document.querySelector('.slider-container');
+            const slides = document.querySelectorAll('.slide');
+            const dotsContainer = document.querySelector('.dots');
+            const prevButton = document.querySelector('.prev-slide');
+            const nextButton = document.querySelector('.next-slide');
+            let currentIndex = 0;
+            const totalSlides = slides.length;
+
+            slides.forEach((_, index) => {
+                const dot = document.createElement('span');
+                dot.classList.add('dot');
+                if (index === 0) dot.classList.add('active');
+                dot.addEventListener('click', () => goToSlide(index));
+                dotsContainer.appendChild(dot);
+            });
+
+            const dots = document.querySelectorAll('.dot');
+
+            function updateSlider() {
+                slides.forEach((slide, index) => {
+                    slide.classList.toggle('active', index === currentIndex);
+                });
+                dots.forEach((dot, index) => {
+                    dot.classList.toggle('active', index === currentIndex);
+                });
+                sliderContainer.style.transform = `translateX(-${currentIndex * 100}%)`;
+            }
+
+            function goToSlide(index) {
+                currentIndex = index;
+                if (currentIndex >= totalSlides) currentIndex = 0;
+                if (currentIndex < 0) currentIndex = totalSlides - 1;
+                updateSlider();
+            }
+
+            let autoSlide = setInterval(() => {
+                goToSlide(currentIndex + 1);
+            }, 5000);
+
+            document.querySelector('.hero-slider').addEventListener('mouseenter', () => {
+                clearInterval(autoSlide);
+            });
+
+            document.querySelector('.hero-slider').addEventListener('mouseleave', () => {
+                autoSlide = setInterval(() => {
+                    goToSlide(currentIndex + 1);
+                }, 5000);
+            });
+
+            nextButton.addEventListener('click', () => {
+                goToSlide(currentIndex + 1);
+            });
+
+            prevButton.addEventListener('click', () => {
+                goToSlide(currentIndex - 1);
+            });
+
+            updateSlider();
+
+            // Dropdown Toggle
+            const loginBtn = document.getElementById('login-btn');
+            const dropdownContent = document.getElementById('login-dropdown');
+
+            loginBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                dropdownContent.classList.toggle('show');
+            });
+
+            document.addEventListener('click', (e) => {
+                if (!loginBtn.contains(e.target) && !dropdownContent.contains(e.target)) {
+                    dropdownContent.classList.remove('show');
+                }
+            });
+
+            // Scroll Animation
+            const faders = document.querySelectorAll('.hero-slider, .education-categories, .courses, .profile, .about-us, .vision-mission, .purpose, .uvp, .outcome-impact, .who-we-are, .core-values, .founders, .advisory-board, .associates, .team, .collaborators, .contact-us, .contact-info, .courses h2, .course-card, .profile-card, .category-card');
+            const appearOptions = { threshold: 0.2 };
+
+            const appearOnScroll = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('fade-in');
+                        if (entry.target.classList.contains('profile-card')) {
+                            const progress = entry.target.querySelector('.progress');
+                            progress.style.width = '60%';
+                        }
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, appearOptions);
+
+            faders.forEach(fader => {
+                appearOnScroll.observe(fader);
+            });
+
+            // Background Objects Distribution
+            const objects = document.querySelectorAll('.object');
+            const container = document.querySelector('.background-objects');
+
+            const setContainerHeight = () => {
+                const docHeight = document.body.scrollHeight;
+                container.style.height = `${docHeight}px`;
+            };
+
+            setContainerHeight();
+            window.addEventListener('resize', setContainerHeight);
+
+            objects.forEach((object, index) => {
+                const left = Math.random() * 90 + 5;
+                const top = (index / (objects.length - 1)) * 100;
+                object.style.left = `${left}%`;
+                object.style.top = `${top}%`;
+                const delay = Math.random() * 5;
+                const duration = 8 + Math.random() * 4;
+                object.style.animationDelay = `${delay}s`;
+                object.style.animationDuration = `${duration}s`;
+            });
+
+            // Light/Dark Mode Toggle
+            const toggleButton = document.querySelector('.mode-toggle');
+            const toggleIcon = toggleButton.querySelector('i');
+            const body = document.body;
+
+            const savedMode = localStorage.getItem('mode');
+            if (savedMode === 'light') {
+                body.classList.add('light-mode');
+                toggleIcon.classList.remove('fa-moon');
+                toggleIcon.classList.add('fa-sun');
+            }
+
+            toggleButton.addEventListener('click', () => {
+                body.classList.toggle('light-mode');
+                const isLightMode = body.classList.contains('light-mode');
+                toggleIcon.style.opacity = '0';
+                setTimeout(() => {
+                    toggleIcon.classList.toggle('fa-moon', !isLightMode);
+                    toggleIcon.classList.toggle('fa-sun', isLightMode);
+                    toggleIcon.style.opacity = '1';
+                }, 300);
+                localStorage.setItem('mode', isLightMode ? 'light' : 'dark');
+            });
+        });
+    </script>
+</body>
+</html>
